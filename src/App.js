@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Spinner from './Components/Spinner';
 import routes from './routes';
-import { Particle } from 'jparticles'
+import { Wave } from 'jparticles'
 import styles from './App.module.css'
 import PrivateRoute from './Components/PrivateRoute'
 import PublicRoute from './Components/PublicRoute'
@@ -33,15 +33,28 @@ const RegistrationPage = lazy(() =>
 class App extends React.Component{
   componentDidMount() {
     this.props.onGetCurrentUser();
-     new Particle('#demo',{
-    proximity: 90,
-       range: 130,
-       maxSpeed: 0.6,
-       lineShape: "spider",
-       parallax: true,
- 
- 
-})
+    new Wave('#demo', {
+      num: 3,
+      // Draw line
+      line: true,
+      // The colors of the three lines in sequence
+      lineColor: [
+        'rgba(0, 190, 112, 0.5)',
+        'rgba(0, 190, 112, 0.7)',
+        'rgba(0, 190, 112, 0.9)',
+      ],
+      // The width of the three lines in turn
+      lineWidth: [0.5, 0.7, 0.9],
+      // The offset value of the three lines from the left in turn
+      offsetLeft: [2, 1, 0],
+      // All three lines are 0.75 times the height of the top offset container
+      offsetTop: 0.5,
+      // The height of the crests of the three lines in sequence
+      crestHeight: [10, 14, 18],
+      // All three lines have only two crests
+      crestCount: 2,
+      speed: 0.1,
+  })
   }
   render() {
     return (

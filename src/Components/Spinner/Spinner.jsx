@@ -6,13 +6,7 @@ import styles from './Spinner.module.css';
 const Spinner = () => {
   return (
     <div className={styles.spinner}>
-      <Loader
-        type="ThreeDots"
-        color="rgb(120, 9, 148)"
-        height={100}
-        width={100}
-        timeout={3000}
-      />
+      <Loader type="BallTriangle" color="rgb(5, 54, 39)" height={100} width={100} timeout={3000}/>
     </div>
   );
 };
