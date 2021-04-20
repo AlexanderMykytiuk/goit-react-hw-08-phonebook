@@ -18,22 +18,22 @@ const {
 axios.defaults.baseURL = 'https://goit-phonebook-api.herokuapp.com';
 
 const token = {
-  // когда пользователь зарегестриловался/залогинился устанавливаем заголовок:  
+  // когда пользователь зарегестриловался/залогинился устанавливаем заголовок:
   set(token) {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
   },
   // снимаем когда пользователь разлогинился:
   unset() {
     axios.defaults.headers.common.Authorization = ``;
-  }
-}
+  },
+};
 
 const registration = userData => async dispatch => {
   dispatch(registrationRequest());
   const response = await axios.post('users/signup', userData);
   dispatch(registrationSuccess(response.data));
   console.log(response.data);
-  token.set(response.data.token)
+  token.set(response.data.token);
   try {
   } catch (error) {
     dispatch(registrationrError(error.message));
@@ -41,12 +41,12 @@ const registration = userData => async dispatch => {
 };
 const login = userData => async dispatch => {
   dispatch(loginRequest());
-  
+
   try {
     const response = await axios.post('users/login', userData);
-    token.set(response.data.token)
+    token.set(response.data.token);
     dispatch(loginSuccess(response.data));
-  console.log(response.data);
+    console.log(response.data);
   } catch (error) {
     dispatch(loginError(error.message));
   }
@@ -61,18 +61,20 @@ const logout = () => async dispatch => {
     dispatch(logoutError(error.message));
   }
 };
-// с помощью getState получаем доступ к PersistGate 
+// с помощью getState получаем доступ к PersistGate
 const getCurrentUser = () => async (dispatch, getState) => {
-  const { autorization: { token: persistedToken } } = getState();
+  const {
+    autorization: { token: persistedToken },
+  } = getState();
   if (!persistedToken) {
-    return
+    return;
   }
-  token.set(persistedToken)
+  token.set(persistedToken);
   dispatch(getCurrentUserRequest());
 
   try {
-const response= await axios.get('users/current');
-  dispatch(getCurrentUserSuccess(response.data));
+    const response = await axios.get('users/current');
+    dispatch(getCurrentUserSuccess(response.data));
   } catch (error) {
     dispatch(getCurrentUserError(error.message));
   }

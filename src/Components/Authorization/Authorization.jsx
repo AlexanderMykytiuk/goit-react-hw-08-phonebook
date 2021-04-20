@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import routes from '../../routes';
-import styles from './Authorization.module.scss'
+import styles from './Authorization.module.scss';
 import InputIcon from '@material-ui/icons/Input';
 
 const Authorization = () => {
@@ -18,13 +18,13 @@ const Authorization = () => {
           </NavLink>
         </li>
         <li className="navbar-brand">
-          <NavLink 
+          <NavLink
             to={routes.login}
             className={styles.current}
             activeClassName={styles.selected}
           >
             Login
-             <InputIcon className={styles.input}/>
+            <InputIcon className={styles.input} />
           </NavLink>
         </li>
       </ul>

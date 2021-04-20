@@ -43,16 +43,16 @@ const isLogedIn = createReducer(false, {
   [loginSuccess]: () => true,
   [getCurrentUserSuccess]: () => true,
 
-   [registrationrError]: () => false,
+  [registrationrError]: () => false,
   [loginError]: () => false,
-   [logoutError]: () => false,
+  [logoutError]: () => false,
   [getCurrentUserError]: () => false,
   [logoutSuccess]: () => false,
-})
+});
 
 export default combineReducers({
   user,
-   isLogedIn,
+  isLogedIn,
   token,
   error,
 });

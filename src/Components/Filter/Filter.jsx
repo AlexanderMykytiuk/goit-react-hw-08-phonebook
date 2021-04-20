@@ -7,14 +7,13 @@ const Filter = ({ filter, onHandleInputSearch }) => {
     <div className={styles.findContact}>
       <h2 className={styles.title}>Find your contacts by name</h2>
       <label className={styles.findContactLabel}>
-        
         <input
           className={styles.findContactInput}
           name="filter"
           type="text"
           value={filter}
           onChange={onHandleInputSearch}
-          placeholder='Enter the name'
+          placeholder="Enter the name"
         />
       </label>
     </div>

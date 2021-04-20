@@ -4,11 +4,11 @@ import ListItem from '../ListItem';
 
 const ContactList = ({ contacts, onDeleteContact }) => {
   return (
-    <div className={styles.container}> 
-    <ul className={styles.list}>
-      <ListItem contacts={contacts} onDeleteContact={onDeleteContact} />
+    <div className={styles.container}>
+      <ul className={styles.list}>
+        <ListItem contacts={contacts} onDeleteContact={onDeleteContact} />
       </ul>
-      </div>
+    </div>
   );
 };
 

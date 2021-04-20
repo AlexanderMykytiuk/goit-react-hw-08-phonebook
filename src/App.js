@@ -1,4 +1,4 @@
-import React, {Suspense,lazy} from 'react';
+import React, { Suspense, lazy } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Container from './Components/Container';
@@ -7,16 +7,16 @@ import AppBar from './Components/AppBar';
 // import HomePage from './views/HomePage';
 // import LoginPage from './views/LoginPage';
 // import RegistrationPage from './views/RegistrationPage';
-import authOperation from './redux/Auth/auth-operation'
+import authOperation from './redux/Auth/auth-operation';
 import { connect } from 'react-redux';
 
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Spinner from './Components/Spinner';
 import routes from './routes';
-import { Wave } from 'jparticles'
-import styles from './App.module.css'
-import PrivateRoute from './Components/PrivateRoute'
-import PublicRoute from './Components/PublicRoute'
+import { Wave } from 'jparticles';
+import styles from './App.module.css';
+import PrivateRoute from './Components/PrivateRoute';
+import PublicRoute from './Components/PublicRoute';
 
 const HomePage = lazy(() =>
   import('./views/HomePage.js' /* webpackChunkName: "Home-page" */),
@@ -28,9 +28,11 @@ const LoginPage = lazy(() =>
   import('./views/LoginPage' /* webpackChunkName: "Login-page" */),
 );
 const RegistrationPage = lazy(() =>
-  import('./views/RegistrationPage.js' /* webpackChunkName: "Registration-page" */),
+  import(
+    './views/RegistrationPage.js' /* webpackChunkName: "Registration-page" */
+  ),
 );
-class App extends React.Component{
+class App extends React.Component {
   componentDidMount() {
     this.props.onGetCurrentUser();
     new Wave('#demo', {
@@ -54,35 +56,47 @@ class App extends React.Component{
       // All three lines have only two crests
       crestCount: 2,
       speed: 0.1,
-  })
+    });
   }
   render() {
     return (
-     
       // <Container>
-        <div>
-        <div id="demo" className={styles.demo}>
-        </div>
+      <div>
+        <div id="demo" className={styles.demo}></div>
         <Container>
           <ToastContainer />
           <Suspense fallback={<Spinner />}>
-          <AppBar />
-          <Switch>
-      <Route exact path={routes.home} component={HomePage} />
-          <PrivateRoute exact path={routes.contacts} component={ContactsPage} redirectTo='/login/'/>
-      <PublicRoute exact path={routes.login} component={LoginPage} restricted  redirectTo='/contacts/'/>
-            <PublicRoute exact path={routes.registration} component={RegistrationPage} restricted redirectTo='/contacts/' />
+            <AppBar />
+            <Switch>
+              <Route exact path={routes.home} component={HomePage} />
+              <PrivateRoute
+                exact
+                path={routes.contacts}
+                component={ContactsPage}
+                redirectTo="/login/"
+              />
+              <PublicRoute
+                exact
+                path={routes.login}
+                component={LoginPage}
+                restricted
+                redirectTo="/contacts/"
+              />
+              <PublicRoute
+                exact
+                path={routes.registration}
+                component={RegistrationPage}
+                restricted
+                redirectTo="/contacts/"
+              />
             </Switch>
-            </Suspense>
-          </Container>
-         </div>
+          </Suspense>
+        </Container>
+      </div>
       //  {/* </Container> */}
-       
-  );
+    );
   }
 }
-
-
 
 // function App() {
 //   return (
@@ -97,7 +111,7 @@ class App extends React.Component{
 //   );
 // }
 const mapDispathToProps = {
-  onGetCurrentUser:authOperation.getCurrentUser
-}
+  onGetCurrentUser: authOperation.getCurrentUser,
+};
 
 export default connect(null, mapDispathToProps)(App);
